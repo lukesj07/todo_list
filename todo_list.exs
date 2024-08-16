@@ -16,12 +16,14 @@ defmodule TodoList do
   end
 
   defp add_task(tasks) do
+    IO.ANSI.clear() <> IO.ANSI.cursor(0,0) |> IO.puts()
     tasks = tasks ++ [String.trim(IO.gets("Enter the task to add: "))]
     File.write!(@tasks_file, Enum.join(tasks, "\n"))
     handle_command(tasks)
   end
 
   defp delete_task(tasks) do
+    IO.ANSI.clear() <> IO.ANSI.cursor(0,0) |> IO.puts()
     Enum.each(Enum.with_index(tasks), fn {task, index} -> IO.puts("#{index} - #{task}") end)
     case Integer.parse(String.trim(IO.gets("Enter the number of the task to delete: "))) do
       {index, ""} when index >= 0 and index < length(tasks) ->
@@ -39,6 +41,7 @@ defmodule TodoList do
       "add" ->
         add_task(tasks)
       "list" ->
+        IO.ANSI.clear() <> IO.ANSI.cursor(0,0) |> IO.puts()
         Enum.each(tasks, fn task -> IO.puts("- #{task}") end)
         handle_command(tasks)
       "delete" ->
