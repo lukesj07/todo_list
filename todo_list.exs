@@ -39,7 +39,7 @@ defmodule TodoList do
       "add" ->
         add_task(tasks)
       "list" ->
-        Enum.each(tasks, fn task -> IO.puts(task) end)
+        Enum.each(tasks, fn task -> IO.puts("- #{task}") end)
         handle_command(tasks)
       "delete" ->
         delete_task(tasks)
